@@ -1,0 +1,69 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      - name: Determine base path
+        id: base-path
+        run: |
+          REPO_NAME="${{ github.repository }}"
+          OWNER="${REPO_NAME%%/*}"
+          REPO="${REPO_NAME##*/}"
+          
+          if [ "$REPO" = "${OWNER}.github.io" ]; then
+            echo "base_path=" >> $GITHUB_OUTPUT
+            echo "Repository is ${OWNER}.github.io, using empty base path"
+          else
+            echo "base_path=/${REPO}/" >> $GITHUB_OUTPUT
+            echo "Repository is ${REPO}, using base path: /${REPO}/"
+          fi
+
+      - name: Build
+        working-directory: ./frontend
+        env:
+          VITE_BASE_PATH: ${{ steps.base-path.outputs.base_path }}
+        run: npm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./frontend/dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
