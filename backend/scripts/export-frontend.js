@@ -31,7 +31,7 @@ function getAllDeployments() {
 }
 
 function main() {
-  // Get all existing deployments
+  // Get all existing deployments across networks
   const allDeployments = getAllDeployments();
   
   if (allDeployments.length === 0) {
