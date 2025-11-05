@@ -5,6 +5,7 @@ import {FHE, euint32, ebool, externalEuint32} from "@fhevm/solidity/lib/FHE.sol"
 import {ZamaEthereumConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
 
 contract PerformanceReview is ZamaEthereumConfig {
+    // Performance data structure storing encrypted scores
     struct PerformanceData {
         euint32 exec;   // Encrypted execution score
         euint32 team;   // Encrypted teamwork score

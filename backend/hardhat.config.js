@@ -4,6 +4,8 @@ require("hardhat-deploy");
 require("hardhat-deploy-ethers");
 const { ethers } = require("ethers");
 
+// Hardhat configuration for FHEVM Performance Review project
+
 // Helper function to get accounts from mnemonic
 function getAccountsFromMnemonic(mnemonic) {
   if (!mnemonic) return [];
