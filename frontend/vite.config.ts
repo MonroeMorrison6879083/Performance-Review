@@ -13,7 +13,7 @@ export default defineConfig({
     }
   },
   build: {
-    // 增加构建超时时间
+    // Increase build timeout and chunk size warning limit
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
