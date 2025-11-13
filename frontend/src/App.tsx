@@ -331,6 +331,7 @@ export default function App() {
     }
   };
 
+  // Format Ethereum address for display
   const formatAddress = (addr: string) => {
     if (!addr) return "Not connected";
     return `${addr.substring(0, 6)}...${addr.substring(addr.length - 4)}`;
