@@ -96,10 +96,11 @@ The export script will automatically:
 **Note**: Make sure your wallet has sufficient Sepolia ETH to pay for gas fees.
 
 Notes on dependencies and versions (as required):
-- `@fhevm/solidity: ^0.8.0`
-- `@fhevm/hardhat-plugin: ^0.1.0`
+- `@fhevm/solidity: ^0.9.1`
+- `@fhevm/hardhat-plugin: ^0.3.0-1`
 - `hardhat-deploy: ^0.12.4`
-- `@fhevm/mock-utils: 0.1.0` (included in devDependencies)
+- `@fhevm/mock-utils: 0.3.0-1` (included in devDependencies)
+- `@zama-fhe/relayer-sdk: ^0.3.0-5`
 
 ---
 
